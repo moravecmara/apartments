@@ -10,25 +10,62 @@
   </div>
 
   <div class="card stat-card">
-    <div class="card-body p-0">
+    <div class="card-body">
       <div th:if="${#lists.isEmpty(tenants)}" class="text-center py-5 text-muted">
         <i class="bi bi-people fs-1"></i><p class="mt-2">Žádní nájemci.</p>
       </div>
-      <table th:if="${!#lists.isEmpty(tenants)}" class="table table-hover mb-0">
-        <thead>
-          <tr><th>Jméno</th><th>Email</th><th>Telefon</th><th>Bankovní účet</th></tr>
-        </thead>
-        <tbody>
-        <tr th:each="t : ${tenants}">
-          <td><i class="bi bi-person-circle text-muted me-2"></i><span th:text="${t.name}">—</span></td>
-          <td><a th:href="'mailto:' + ${t.email}" th:text="${t.email}">—</a></td>
-          <td th:text="${t.phone ?: '—'}">—</td>
-          <td><code th:text="${t.bankAccountNumber ?: '—'}">—</code></td>
-        </tr>
-        </tbody>
-      </table>
+      <div th:if="${!#lists.isEmpty(tenants)}">
+        <!-- Toolbar: search + name filter -->
+        <div class="row g-2 mb-3">
+          <div class="col-sm-6 col-md-4">
+            <div class="input-group input-group-sm">
+              <span class="input-group-text"><i class="bi bi-search"></i></span>
+              <input type="text" id="tenantSearch" class="form-control" placeholder="Hledat (jméno, email, telefon…)"/>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <input type="text" id="tenantNameFilter" class="form-control form-control-sm" placeholder="Filtr podle jména"/>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table id="tenantsTable" class="table table-hover mb-0">
+            <thead>
+              <tr><th>Jméno</th><th>Email</th><th>Telefon</th><th>Bankovní účet</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="t : ${tenants}">
+              <td><i class="bi bi-person-circle text-muted me-2"></i><span th:text="${t.name}">—</span></td>
+              <td><a th:href="'mailto:' + ${t.email}" th:text="${t.email}">—</a></td>
+              <td th:text="${t.phone ?: '—'}">—</td>
+              <td><code th:text="${t.bankAccountNumber ?: '—'}">—</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
+
+  <script th:inline="none">
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/cs.json'
+      },
+      order: [[0, 'asc']],
+      pageLength: 25,
+      dom: 'tip'   // table, info, pagination — search handled manually
+    });
+
+    // Global search input
+    $('#tenantSearch').on('keyup', function() {
+      dt.search(this.value).draw();
+    });
+
+    // Column 0 filter (Jméno)
+    $('#tenantNameFilter').on('keyup', function() {
+      dt.column(0).search(this.value).draw();
+    });
+  });
+  </script>
 
 </th:block>
 </div>
