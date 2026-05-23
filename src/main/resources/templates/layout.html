@@ -29,22 +29,22 @@
     <div class="brand"><i class="bi bi-house-heart-fill me-2"></i>RentFlow</div>
     <ul class="nav flex-column flex-grow-1">
       <li class="nav-item">
-        <a class="nav-link" th:classappend="${#httpServletRequest.requestURI=='/dashboard'?'active':''}" href="/dashboard">
+        <a class="nav-link" th:classappend="${currentUri=='/dashboard'?'active':''}" href="/dashboard">
           <i class="bi bi-speedometer2 me-2"></i>Dashboard
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" th:classappend="${#httpServletRequest.requestURI.startsWith('/properties')?'active':''}" href="/properties">
+        <a class="nav-link" th:classappend="${#strings.startsWith(currentUri,'/properties')?'active':''}" href="/properties">
           <i class="bi bi-buildings me-2"></i>Nemovitosti
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" th:classappend="${#httpServletRequest.requestURI.startsWith('/tenants')?'active':''}" href="/tenants">
+        <a class="nav-link" th:classappend="${#strings.startsWith(currentUri,'/tenants')?'active':''}" href="/tenants">
           <i class="bi bi-people me-2"></i>Nájemci
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" th:classappend="${#httpServletRequest.requestURI.startsWith('/payments')?'active':''}" href="/payments">
+        <a class="nav-link" th:classappend="${#strings.startsWith(currentUri,'/payments')?'active':''}" href="/payments">
           <i class="bi bi-credit-card me-2"></i>Platby
         </a>
       </li>
