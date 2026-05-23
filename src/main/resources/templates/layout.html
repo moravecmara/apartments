@@ -20,6 +20,12 @@
     .badge-partial { background:#cfe2ff;color:#084298; }
     .table th { font-size:.8rem; text-transform:uppercase; color:#6c757d; font-weight:600; }
     @media(max-width:768px){ .sidebar{ min-height:auto; } }
+    /* DataTables sort arrows */
+    table.dataTable thead th { cursor: pointer; user-select: none; white-space: nowrap; }
+    table.dataTable thead th.sorting::after        { content: " ⇅"; opacity: .35; font-size:.8em; }
+    table.dataTable thead th.sorting_asc::after    { content: " ↑"; color: #0d6efd; font-size:.8em; }
+    table.dataTable thead th.sorting_desc::after   { content: " ↓"; color: #0d6efd; font-size:.8em; }
+    table.dataTable thead th.sorting_disabled::after { content: ""; }
   </style>
 </head>
 
