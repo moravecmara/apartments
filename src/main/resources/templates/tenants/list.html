@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Nájemci')}"></head>
+<body>
+<div th:replace="~{layout :: layout('Nájemci', ~{::content})}">
+<th:block th:fragment="content">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0"><i class="bi bi-people me-2 text-primary"></i>Nájemci</h4>
+  </div>
+
+  <div class="card stat-card">
+    <div class="card-body p-0">
+      <div th:if="${#lists.isEmpty(tenants)}" class="text-center py-5 text-muted">
+        <i class="bi bi-people fs-1"></i><p class="mt-2">Žádní nájemci.</p>
+      </div>
+      <table th:if="${!#lists.isEmpty(tenants)}" class="table table-hover mb-0">
+        <thead>
+          <tr><th>Jméno</th><th>Email</th><th>Telefon</th><th>Bankovní účet</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="t : ${tenants}">
+          <td><i class="bi bi-person-circle text-muted me-2"></i><span th:text="${t.name}">—</span></td>
+          <td><a th:href="'mailto:' + ${t.email}" th:text="${t.email}">—</a></td>
+          <td th:text="${t.phone ?: '—'}">—</td>
+          <td><code th:text="${t.bankAccountNumber ?: '—'}">—</code></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</th:block>
+</div>
+</body>
+</html>
