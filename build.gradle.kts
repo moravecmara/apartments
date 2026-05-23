@@ -36,6 +36,10 @@ dependencies {
 	// QR code generation (SPD format)
 	implementation("com.google.zxing:core:3.5.3")
 	implementation("com.google.zxing:javase:3.5.3")
+	// PDF generation
+	implementation("org.apache.pdfbox:pdfbox:3.0.3")
+	// Email
+	implementation("org.springframework.boot:spring-boot-starter-mail")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testImplementation("org.springframework.security:spring-security-test")
